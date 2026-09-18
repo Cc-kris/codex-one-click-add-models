@@ -1,42 +1,42 @@
 ---
 name: "codex-add-models"
-description: "Use when the user says 添加其他模型, or wants extra models (DeepSeek, GLM, Grok, Kimi, MiniMax, Qwen, GPT-5.6) in the Codex Desktop picker, or to write ~/.codex/ccai-catalog.json and model_catalog_json. Do not change base_url or API keys."
+description: "用户说「添加其他模型」，或要把 DeepSeek、GLM、Grok、Kimi、MiniMax、Qwen、GPT-5.6 等写进 Codex 桌面端模型列表时使用。写入 ~/.codex/ccai-catalog.json 并设置 model_catalog_json。不要改 base_url 和 API Key。"
 metadata:
-  short-description: "Add extra models to the Codex Desktop picker"
+  short-description: "给 Codex 桌面端补上其他模型"
 ---
 
 # Codex 添加模型
 
-Write `~/.codex/ccai-catalog.json` and set `model_catalog_json` in `config.toml`. The Desktop picker reads that file.
+写入 `~/.codex/ccai-catalog.json`，并在 `config.toml` 里设置 `model_catalog_json`。桌面端下拉读的是这份文件。
 
-## Constraints
+## 约束
 
-- Only those two things. Never edit `base_url`, `experimental_bearer_token`, `auth.json`, or other provider fields.
-- Do not copy official `models_cache.json` as the custom catalog (extra fields / JSON null send Codex to the login page).
-- Do not emit JSON `null`. Do not set `wire_api = "chat"`.
-- Catalog slugs must match the proxy model ids exactly.
-- After a successful run, tell the user to fully quit and reopen Codex.
+- 只做上面两件事。不要改 `base_url`、`experimental_bearer_token`、`auth.json` 或其他 provider 字段。
+- 不要把官方 `models_cache.json` 整份当自定义目录（多余字段或 JSON null 会让 Codex 跳登录页）。
+- 不要输出 JSON `null`。不要把 `wire_api` 改成 `"chat"`。
+- catalog 里的 slug 必须和接口上的 model id 完全一致。
+- 跑成功后提醒用户：完全退出再打开 Codex。
 
-## Run
+## 运行
 
-From this skill folder:
+在本 skill 目录下：
 
 ```bash
 python3 scripts/install_ccai_catalog.py
 ```
 
-On Windows: `python` or `py -3`. The script resolves `~/.codex` / `%USERPROFILE%\.codex`.
+Windows 可用 `python` 或 `py -3`。脚本会定位 `~/.codex` / `%USERPROFILE%\\.codex`。
 
-To add or remove models, edit `MODELS` in `scripts/install_ccai_catalog.py` and run again.
+要增删模型，改 `scripts/install_ccai_catalog.py` 里的 `MODELS` 再跑一遍。
 
-## Reasoning levels
+## 推理深度
 
-`default_reasoning_level` must be one of `supported_reasoning_levels` or the UI hides the control.
+`default_reasoning_level` 必须出现在该条的 `supported_reasoning_levels` 里，否则界面不给调档。
 
-- gpt / grok: low, medium, high, xhigh, max
-- reasoner: low, medium, high, xhigh
-- flash: none, low, medium, high
+- gpt / grok：low, medium, high, xhigh, max
+- 偏推理：low, medium, high, xhigh
+- 偏 flash：none, low, medium, high
 
-## Protocol
+## 协议
 
-Codex uses OpenAI Responses. A native Anthropic `/v1/messages` endpoint will not become Claude protocol just because the slug is in the catalog.
+Codex 走 OpenAI Responses。原生 Anthropic `/v1/messages` 不会因为写进 catalog 就变成 Claude 协议。

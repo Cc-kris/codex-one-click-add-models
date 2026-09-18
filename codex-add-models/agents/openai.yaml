@@ -1,4 +1,4 @@
 interface:
-  display_name: "Codex Add Models"
-  short_description: "Write extra models into the Codex Desktop picker"
+  display_name: "Codex 添加模型"
+  short_description: "给 Codex 桌面端写入其他模型"
   default_prompt: "添加其他模型"
