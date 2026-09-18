@@ -1,4 +1,4 @@
 interface:
   display_name: "Codex Add Models"
   short_description: "Write extra models into the Codex Desktop picker"
-  default_prompt: "Install extra proxy models into my Codex Desktop picker without changing URL or API key."
+  default_prompt: "添加其他模型"

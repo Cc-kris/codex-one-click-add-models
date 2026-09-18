@@ -1,6 +1,6 @@
 ---
 name: "codex-add-models"
-description: "Use when the user wants extra proxy models (DeepSeek, GLM, Grok, Kimi, MiniMax, Qwen, GPT-5.6) in the Codex Desktop model picker, or to write ~/.codex/ccai-catalog.json and model_catalog_json. Do not change base_url or API keys."
+description: "Use when the user says 添加其他模型, or wants extra models (DeepSeek, GLM, Grok, Kimi, MiniMax, Qwen, GPT-5.6) in the Codex Desktop picker, or to write ~/.codex/ccai-catalog.json and model_catalog_json. Do not change base_url or API keys."
 metadata:
   short-description: "Add extra models to the Codex Desktop picker"
 ---

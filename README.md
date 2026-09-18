@@ -39,7 +39,7 @@ model_catalog_json = "ccai-catalog.json"
 装好后（下一轮生效），再说：
 
 ```text
-把中转模型加进下拉
+添加其他模型
 ```
 
 然后 **完全退出再开 Codex**，下拉里才会出现新模型。
