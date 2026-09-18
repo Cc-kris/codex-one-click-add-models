@@ -27,6 +27,8 @@ model_catalog_json = "ccai-catalog.json"
 然后 **完全退出再打开 Codex**，下拉里就会出现这些模型，推理深度也能调。中转的地址和 Key 不会被改。
 
 ---
+<img width="1171" height="947" alt="image" src="https://github.com/user-attachments/assets/3f0e1c33-15d3-4fff-95b0-22708984e3cf" />
+
 
 ## 推荐中转
 
