@@ -2,8 +2,8 @@
 
 # Codex 一键添加模型脚本
 
-**让 Codex 桌面端下拉里出现 DeepSeek、GLM、Grok、Kimi、Qwen…**  
-双击运行 · 不改 API Key · 不改中转地址 · 带推理深度
+双击运行，给 Codex 桌面端补上自定义模型列表。  
+不改 API Key，不改中转地址，可选推理深度。
 
 [![Release](https://img.shields.io/github/v/release/Cc-kris/codex-one-click-add-models?color=2ea44f)](https://github.com/Cc-kris/codex-one-click-add-models/releases)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -16,37 +16,31 @@
 
 ---
 
-OpenAI Codex 桌面端默认只能在模型列表里看到官方 GPT。  
-很多人已经用了 **OpenAI 兼容中转**（GPT / Claude / Gemini / 国产模型），但 Codex 下拉里就是选不到 DeepSeek、GLM、Grok。
+Codex 桌面端自带的模型下拉只有官方那几个 GPT。中转里明明有 DeepSeek、GLM、Grok、Kimi、Qwen，界面上就是选不到。
 
-这个脚本只做一件事：给 `~/.codex/` 写一份合法的 **自定义模型目录**（`ccai-catalog.json`），并在 `config.toml` 里加上：
+跑这个脚本会在 `~/.codex/` 生成 `ccai-catalog.json`，并在 `config.toml` 写入：
 
 ```toml
 model_catalog_json = "ccai-catalog.json"
 ```
 
-写完 **完全退出再打开 Codex**，下拉就能切模型，还能调 **low / medium / high / xhigh / max** 等推理深度。  
-`base_url` 和 Key **一律不动**。
-
-适合搜这些词的人：`Codex 添加模型`、`Codex 自定义模型列表`、`Codex DeepSeek`、`Codex GLM`、`Codex Grok`、`Codex 中转`、`model_catalog_json`。
+然后 **完全退出再打开 Codex**，下拉里就会出现这些模型，推理深度也能调。中转的地址和 Key 不会被改。
 
 ---
 
 ## 推荐中转
 
-脚本只管「列表能不能出现」。真正能不能打通，取决于中转是否提供 **OpenAI Responses 兼容** 接口。
-
 | 名称 | 简介 | 链接 |
 |:----:|:-----|:-----|
 | **CCAI** | CCAI 是一站式多模型中转平台，支持 GPT、Claude、Gemini 和各种国模。稳定高效，随充随用。 | [https://cc-ai.xyz](https://cc-ai.xyz) |
 
-> 先在中转后台确认 model id 和本脚本 slug **一字不差**，再在 Codex 里点选。
+中转后台里的模型名要和下面表格里的 slug 一致，否则列表能点、请求会失败。
 
 ---
 
 ## 用法
 
-需要已安装 **Python 3**。从 [Releases](https://github.com/Cc-kris/codex-one-click-add-models/releases/latest) 下载 zip，解压即可。
+需要 Python 3。从 [Releases](https://github.com/Cc-kris/codex-one-click-add-models/releases/latest) 下 zip，解压。
 
 <table>
 <tr>
@@ -54,9 +48,7 @@ model_catalog_json = "ccai-catalog.json"
 
 ### Windows
 
-1. 双击 `一键添加其他模型（windows）.bat`
-2. 看到成功提示后关掉窗口
-3. **完全退出** Codex 桌面端再打开
+双击 `一键添加其他模型（windows）.bat`，跑完后关掉窗口，再 **完全退出** Codex 重新打开。
 
 </td>
 <td width="50%" valign="top">
@@ -67,47 +59,41 @@ model_catalog_json = "ccai-catalog.json"
 chmod +x "一键添加其他模型（mac）.command"
 ```
 
-然后双击该文件。若系统拦截：  
-**设置 → 隐私与安全性 → 仍要打开**
+双击运行。如果被拦截：系统设置 → 隐私与安全性 → 仍要打开。
 
 </td>
 </tr>
 </table>
 
 <details>
-<summary>不想双击？命令行一样能跑</summary>
+<summary>命令行</summary>
 
 ```bash
 python3 install_ccai_catalog.py
 ```
 
-Windows 也可用 `py -3 install_ccai_catalog.py`。
+Windows 也可以：`py -3 install_ccai_catalog.py`
 
 </details>
 
 ---
 
-## 内置模型与推理档
+## 内置模型
 
-| 模型 slug | 推理深度 |
-|:----------|:---------|
-| `gpt-5.6-luna` · `gpt-5.6-terra` · `gpt-5.6-sol` · `gpt-6-astra` | low / medium / high / xhigh / **max** |
-| `grok-4.5` · `grok-4.6` | low / medium / high / xhigh / **max** |
-| `deepseek-v4-pro` · `glm-5.3` · `kimi-k3` · `qwen3.8-max` | low / medium / high / **xhigh** |
+| slug | 推理深度 |
+|:-----|:---------|
+| `gpt-5.6-luna` · `gpt-5.6-terra` · `gpt-5.6-sol` · `gpt-6-astra` | low / medium / high / xhigh / max |
+| `grok-4.5` · `grok-4.6` | low / medium / high / xhigh / max |
+| `deepseek-v4-pro` · `glm-5.3` · `kimi-k3` · `qwen3.8-max` | low / medium / high / xhigh |
 | `deepseek-v4-flash` · `deepseek-v4.1-flash` · `glm-5.3-flash` · `minimax-m3` | none / low / medium / high |
-
-slug 必须和中转后台的 model id **完全一致**，否则下拉能选、请求会失败。
 
 ---
 
-## 原理（为什么改 models_cache.json 没用）
+## 说明
 
-Codex 下拉优先读 `model_catalog_json` 指向的 JSON。  
-官方 `models_cache.json` 会被联网刷新覆盖，而且字段太杂，直接当自定义目录用会 **解析失败并跳登录页**。
+Codex 读的是 `model_catalog_json` 指向的文件，不是去改会被覆盖的 `models_cache.json`。自定义目录必须是精简字段；把官方缓存整份拷进去，容易解析失败，打开直接进登录页。
 
-本脚本按精简的 OpenAI **Responses** 模板生成条目（和 CC Switch 同类做法）。
-
-> Codex 桌面端走 `wire_api = "responses"`。原生 Anthropic `/v1/messages` **不能**靠本脚本切换；Claude 只有中转做成 OpenAI 兼容时才能用。
+客户端走 OpenAI Responses（`wire_api = "responses"`）。中转如果只提供 Anthropic 原生接口，这个脚本加不出真正的 Claude 协议。
 
 ---
 
